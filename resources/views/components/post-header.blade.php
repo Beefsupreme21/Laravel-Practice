@@ -1,3 +1,6 @@
+@props(['categories'])
+
+
 <header class="max-w-xl mx-auto mt-20 text-center">
     <h1 class="text-4xl">
         Latest <span class="text-blue-500">Laravel From Scratch</span> News
@@ -14,12 +17,18 @@
     <div class="space-y-2 lg:space-y-0 lg:space-x-4 mt-8">
         <!--  Category -->
         <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl">
-            <select class="flex-1 appearance-none bg-transparent py-2 pl-3 pr-9 text-sm font-semibold">
-                <option value="category" disabled selected>Category
-                </option>
-                <option value="personal">Personal</option>
-                <option value="business">Business</option>
-            </select>
+
+            <div x-data="{ show: false }" @click.away="show = false">
+                <button 
+                @click="show = !show">Categories</button>
+                <div x-show="show">
+                    @foreach ($categories as $category)
+                        <a href="/categories/{{ $category->slug }}">
+                        >{{ $category->name }}</a>
+                    @endforeach
+                </div>
+            </div>
+
 
             <svg class="transform -rotate-90 absolute pointer-events-none" style="right: 12px;" width="22"
                  height="22" viewBox="0 0 22 22">
